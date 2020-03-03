@@ -25,7 +25,7 @@ def get_possible_rides(rides, available_hour, max_intensity, max_score):
         else:
             possible_rides.append(ride)
     if possible_rides:
-        possible_rides = sorted(possible_rides, key=lambda tup: tup[1], reverse=True)
+        possible_rides = sorted(possible_rides, key=lambda tup: (tup[1], tup[2], tup[3], tup[4]), reverse=True)
     return possible_rides
 
 
