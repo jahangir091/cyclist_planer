@@ -13,48 +13,26 @@ CAPABILITIES = {
     'thursday': (1, 0.5, 60),
     'friday': (2, 0.2, 25),
     'saturday': (4, 0.6, 20),
-    'sunday': (6, 0.2, 4)
+    'sunday': (6, 0.2, 40)
 }
 
 
-def get_possible_rides(rides, available_hour, max_intensity, max_score):
-    possible_rides = []
-    for ride in rides:
-        if ride[2] > available_hour or ride[3] > max_intensity or ride[4] > max_score:
-            pass
-        else:
-            possible_rides.append(ride)
-    if possible_rides:
-        possible_rides = sorted(possible_rides, key=lambda tup: (tup[1], tup[2], tup[3], tup[4]), reverse=True)
-    return possible_rides
-
-
-def is_valid_ride(ride, available_hour, max_intensity, max_score):
-    if ride[2] > available_hour or ride[3] > max_intensity or ride[4] > max_score:
-        return False
-    return True
+def get_possible_days(capabilities, ride):
+    possible_days = {day: ability for day, ability in capabilities.items() if ability[1] >= ride[3] and ability[2] >= ride[4]}
+    sorted_possile_days = {day: ability for day, ability in sorted(possible_days.items(), key=lambda item: (abs(item[1][0]-ride[2]), item[1][1]-ride[3], item[1][2]-ride[4]), reverse=False)}
+    return sorted_possile_days
 
 
 def main():
     rides_by_day = {}
-    for day, day_ability in CAPABILITIES.items():
-        available_hour = day_ability[0]
-        max_intensity = day_ability[1]
-        max_score = day_ability[2]
-        possible_rides = get_possible_rides(RIDES, available_hour, max_intensity, max_score)
-        rides_by_day[day] = []
-        for ride in possible_rides:
-            if is_valid_ride(ride, available_hour, max_intensity, max_score):
-                rides_by_day[day].append(ride[0])
-                available_hour -= ride[2]
-                max_intensity = round(max_intensity-ride[3], 1)
-                max_score -= ride[4]
-                RIDES.remove(ride)
+    for ride in RIDES:
+        possible_days = get_possible_days(CAPABILITIES, ride)
+        if possible_days:
+            day = list(possible_days)[0]
+            del CAPABILITIES[day]
+            rides_by_day[day] = ride[0]
 
     print(rides_by_day)
-
-
-
 
 
 if __name__ == "__main__":
