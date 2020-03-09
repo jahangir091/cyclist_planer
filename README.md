@@ -12,7 +12,7 @@ go to your terminal and just type:
 
     git clone https://github.com/jahangir091/cyclist_planner.git
 and press enter button.
-The code will be downloaded to yuo local machine.
+The code will be downloaded to your local machine.
 
 ## step:2
 run the command below from your terminal:
@@ -30,12 +30,12 @@ Here you can see some files as below
   - sample_data.csv
   - utils.py
   
-here **riders1.py** is the solution of problem no: 1 and riders2.py is the solution of problem no: 2.
+here **riders1.py** is the solution of problem no: 1 and **riders2.py** is the solution of problem no: 2.
 
 **sample_data.csv** is a headless **.csv** file. This file includes the sample data of 3 riders as stated in the problem no: 1.
 The sample data is in the format below:
 
-** ***no need to add heading for sample data in the sample data file***
+** ***no need to add header for csv file of sample data***
 
 | Time elapsed in Seconds | Time elapsed in Minutes | Cyclist 1 (%FTP) | Cyclist 2 (%FTP)  | Cyclist 3 (%FTP) |
 | ------ | ------ | ------ | ------ | ------ |
